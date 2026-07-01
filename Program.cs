@@ -1,5 +1,5 @@
 ﻿using System;
-using IntelligencePipeline.Validation
+using IntelligencePipeline.Validation;
 
 namespace IntelligencePipeline
 {
@@ -7,7 +7,8 @@ namespace IntelligencePipeline
     {
         static void Main()
         {
-            Console.WriteLine(ValidationResult.Success());
+            Console.WriteLine(ValidationResult.Failure([]));
+
         }
     }
 

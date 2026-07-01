@@ -8,6 +8,8 @@ namespace IntelligencePipeline.Validation
     class ValidationResult
     {
         // fields
+        
+        
         private bool _isValid;
         private List<ErrorModel> _errorMessages;
 
