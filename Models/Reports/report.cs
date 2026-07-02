@@ -1,4 +1,5 @@
 using IntelligencePipeline.Models.Enums;
+using IntelligencePipeline.Validation;
 
 namespace IntelligencePipeline.Models.Reports
 {
@@ -39,6 +40,7 @@ namespace IntelligencePipeline.Models.Reports
             Longitude = longitude;
             Description = description;
             Status = ReportStatus.New;
+            
         }
 
         // abstract methods 

@@ -5,13 +5,13 @@ namespace IntelligencePipeline.Validation
     /// <summary>
     /// Encapsulates the result of a validation operation.
     /// </summary>
-    class ValidationResult
+    public class ValidationResult
     {
         // fields
         
         
         private bool _isValid;
-        private List<ErrorModel> _errorMessages;
+        private List<ErrorModel> _errorMessages = [];
 
         // properties
         public bool IsValid { get=>_isValid; }
@@ -35,6 +35,14 @@ namespace IntelligencePipeline.Validation
             return display;
         }
 
+        // Update Error function
+
+        public void UpdateFailResult(ErrorModel error)
+        {
+            _isValid = false;
+            _errorMessages.Add(error);
+        }
+
         // Quick Creation Validation Reports
         public static ValidationResult Success()
         {
@@ -45,6 +53,8 @@ namespace IntelligencePipeline.Validation
         {
             return new ValidationResult(false, errorMessages);
         }
+
+
 
        
 

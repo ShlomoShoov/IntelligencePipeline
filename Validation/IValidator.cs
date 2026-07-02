@@ -8,6 +8,8 @@ namespace IntelligencePipeline.Validation
     /// </summary>
     interface IValidator
     {
-         ValidationResult Validate(Report report);
+         abstract static ValidationResult Validate(Report report);
+         abstract static void ValidateSpecificFields(Report report, ValidationResult validationResult);
+
     }
 }
