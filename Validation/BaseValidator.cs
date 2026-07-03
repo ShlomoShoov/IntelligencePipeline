@@ -1,3 +1,5 @@
+// Ignore Spelling: Validator
+
 using IntelligencePipeline.Models.Reports;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,9 +14,28 @@ namespace IntelligencePipeline.Validation
     {
 
         // validations functions
+        public ValidationResult Validate(Report report)
+        {
+            ValidationResult validationResult = ValidationResult.Success();
+            ValidateCommonFields(report, validationResult);
+            ValidateSpecificFields(report, validationResult);
+            return validationResult;
+        }
+
+        private void ValidateCommonFields(Report report, ValidationResult validationResult)
+        {
+            _validateTimeStamp(report.Timestamp, validationResult);
+            _ValidateLatitude(report.Latitude, validationResult);
+            _ValidateLongitude(report.Longitude, validationResult);
+            _ValidateDescriptin(report.Description, validationResult);
+        }
+
+        public abstract void ValidateSpecificFields(Report report, ValidationResult validationResult);
+
+
 
         //  Time stamp:
-        private static void _validateTimeStamp(DateTime timeStamp, ValidationResult validationResult)
+        private void _validateTimeStamp(DateTime timeStamp, ValidationResult validationResult)
         {
             DateTime _validTimeStamp = new DateTime(year: 2020, month: 1, day: 1);
 
@@ -36,7 +57,7 @@ namespace IntelligencePipeline.Validation
         }
         // Longitude
 
-        private static void _ValidateLongitude(double longitude, ValidationResult validationResult)
+        private void _ValidateLongitude(double longitude, ValidationResult validationResult)
         {
 
             double _minLongitude = 34.0000;
@@ -51,7 +72,7 @@ namespace IntelligencePipeline.Validation
 
         }
         // latitude
-        private static void _ValidateLatitude(double latitude, ValidationResult validationResult)
+        private void _ValidateLatitude(double latitude, ValidationResult validationResult)
         {
             double _minLatitude = 29.5000;
             double _maxLatitude = 33.5000;
@@ -65,7 +86,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidateDescriptin(string description, ValidationResult validationResult)
+        private void _ValidateDescriptin(string description, ValidationResult validationResult)
         {
             double _minDescription = 10;
             double _maxDescription = 500;
@@ -79,24 +100,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        public static ValidationResult Validate(Report report)
-        {
-            ValidationResult validationResult = ValidationResult.Success();
-            ValidateCommonFields(report, validationResult);
-            ValidateSpecificFields(report, validationResult);
-            return validationResult;
-        }
 
-        private static void ValidateCommonFields(Report report, ValidationResult validationResult)
-        {
-            _validateTimeStamp(report.Timestamp, validationResult);
-            _ValidateLatitude(report.Latitude, validationResult);
-            _ValidateLongitude(report.Longitude, validationResult);
-            _ValidateDescriptin(report.Description, validationResult);
-        }
 
-        public static void ValidateSpecificFields(Report report, ValidationResult validationResult){}
-
-        
     }
 }

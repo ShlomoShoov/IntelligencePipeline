@@ -5,15 +5,10 @@ using IntelligencePipeline.Models.Reports;
 
 namespace IntelligencePipeline.Validation
 {
-    class SoldierValidator : IValidator
+    class SoldierValidator : BaseValidator
     {
-        public static ValidationResult Validate(Report report)
-        {
-            ValidationResult validationResult = BaseValidator.Validate(report);
-            ValidateSpecificFields(report, validationResult);
-            return validationResult;
-        }
-        public static void ValidateSpecificFields(Report report, ValidationResult validationResult)
+
+        public override void ValidateSpecificFields(Report report, ValidationResult validationResult)
         {
             _ValidType(report);
             SoldierReport soldierReport = (SoldierReport)report;
@@ -23,7 +18,7 @@ namespace IntelligencePipeline.Validation
             _ValidateUnit(soldierReport, validationResult);
         }
 
-        private static void _ValidType(Report report)
+        private  void _ValidType(Report report)
         {
             string validType = "Soldier";
             if (validType != report.GetSourceType())
@@ -33,7 +28,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidateName(SoldierReport report, ValidationResult validationResult)
+        private  void _ValidateName(SoldierReport report, ValidationResult validationResult)
         {
             int minSoldierNameLen = 2;
             int maxSoldierNameLen = 50;
@@ -46,7 +41,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidateID(SoldierReport report, ValidationResult validationResult)
+        private  void _ValidateID(SoldierReport report, ValidationResult validationResult)
         {
             int idLength = 7;
             if (!StringExtension.IsDigits(report.SoldierID))
@@ -63,7 +58,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidateUnit(SoldierReport report, ValidationResult validationResult)
+        private  void _ValidateUnit(SoldierReport report, ValidationResult validationResult)
         {
             int minUnitLen = 2;
             int maxUnitLen = 50;
@@ -76,7 +71,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidateconfidenceLevel(SoldierReport report, ValidationResult validationResult)
+        private  void _ValidateconfidenceLevel(SoldierReport report, ValidationResult validationResult)
         {
             int minConfidenceLevel = 1;
             int maxConfidencelevel = 5;

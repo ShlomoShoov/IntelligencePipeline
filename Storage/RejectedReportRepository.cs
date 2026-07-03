@@ -1,4 +1,5 @@
 using IntelligencePipeline.Models.Reports;
+using IntelligencePipeline.Validation;
 
 namespace IntelligencePipeline.Storage
 {
@@ -11,6 +12,11 @@ namespace IntelligencePipeline.Storage
         public RejectedReportRepository()
         {
             _rejectedReports = [];
+        }
+
+        public void Add(Report report)
+        {
+            _rejectedReports.Add(report);
         }
 
         public List<Report> GetAll()
@@ -29,7 +35,8 @@ namespace IntelligencePipeline.Storage
             
             foreach(Report report in _rejectedReports)
             {
-                if (report.RejectionReason.Error == reasonKeyword) 
+                foreach(ErrorModel error in report.RejectionReason)
+                if (error.Error == reasonKeyword) 
                     filteredReports.Add(report);
             }
 

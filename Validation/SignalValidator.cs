@@ -1,4 +1,7 @@
 
+
+// Ignore Spelling: Validator
+
 using IntelligencePipeline.Exceptions;
 using IntelligencePipeline.Models.Enums;
 using IntelligencePipeline.Models.Reports;
@@ -6,15 +9,10 @@ using System.Security.Cryptography;
 
 namespace IntelligencePipeline.Validation
 {
-    class SignalValidetor
+    public class SignalValidator : BaseValidator
     {
-        public static ValidationResult Validate(Report report)
-        {
-            ValidationResult validationResult = BaseValidator.Validate(report);
-            ValidateSpecificFields(report, validationResult);
-            return validationResult;
-        }
-        public static void ValidateSpecificFields(Report report, ValidationResult validationResult)
+
+        public  override void ValidateSpecificFields(Report report, ValidationResult validationResult)
         {
             _ValidType(report);
             SignalReport radarReport = (SignalReport)report;
@@ -24,7 +22,7 @@ namespace IntelligencePipeline.Validation
             _ValidateSignalStrength(radarReport, validationResult);
 
         }
-        private static void _ValidType(Report report)
+        private  void _ValidType(Report report)
         {
             string validType = "Signal";
             if (validType != report.GetSourceType())
@@ -34,7 +32,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidateFrequency(SignalReport report, ValidationResult validationResult)
+        private  void _ValidateFrequency(SignalReport report, ValidationResult validationResult)
         {
             double minFrequency = 1.0;
             double maxFrequency = 3000.0;
@@ -48,7 +46,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidateContent(SignalReport report, ValidationResult validationResult)
+        private  void _ValidateContent(SignalReport report, ValidationResult validationResult)
         {
             int minContent = 5;
             int maxContent = 1000;
@@ -62,7 +60,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidateLanguge(SignalReport report, ValidationResult validationResult)
+        private  void _ValidateLanguge(SignalReport report, ValidationResult validationResult)
         {
             if (!Enum.IsDefined(report.Language))
             {
@@ -72,7 +70,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidateSignalStrength(SignalReport report, ValidationResult validationResult)
+        private void _ValidateSignalStrength(SignalReport report, ValidationResult validationResult)
         {
             double minSignalStrength = -120;
             double maxSignalStrength = 0;

@@ -1,3 +1,5 @@
+// Ignore Spelling: Validator
+
 using IntelligencePipeline.Exceptions;
 using IntelligencePipeline.Models.Reports;
 
@@ -8,15 +10,10 @@ namespace IntelligencePipeline.Validation
     /// <summary>
     /// Validates drone-specific report fields.
     /// </summary>
-    public class DroneValidator : IValidator
+    public class DroneValidator : BaseValidator
     {
-        public static ValidationResult Validate(Report report)
-        {
-            ValidationResult validationResult = BaseValidator.Validate(report);
-            ValidateSpecificFields(report, validationResult);
-            return validationResult;
-        }
-        public static void  ValidateSpecificFields(Report report, ValidationResult validationResult)
+
+        public override void ValidateSpecificFields(Report report, ValidationResult validationResult)
         {
             
             _ValidType(report);
@@ -27,7 +24,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-            private static void _ValidType(Report report)
+        private  void _ValidType(Report report)
             {
                 string validType = "Drone";
                 if (validType != report.GetSourceType())
@@ -37,7 +34,7 @@ namespace IntelligencePipeline.Validation
             
             }
 
-        private static void _ValidAltitude(DroneReport report, ValidationResult validationResult)
+        private  void _ValidAltitude(DroneReport report, ValidationResult validationResult)
         {
             int minAltitude = 100;
             int maxAltitude = 10000;
@@ -50,7 +47,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidImageQuality(DroneReport report, ValidationResult validationResult)
+        private  void _ValidImageQuality(DroneReport report, ValidationResult validationResult)
         {
             int minImageQuality = 1;
             int maxImageQuality = 100;

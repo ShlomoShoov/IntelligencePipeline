@@ -5,15 +5,10 @@ using System.ComponentModel;
 
 namespace IntelligencePipeline.Validation
 {
-    class RadarValidator
+    class RadarValidator : BaseValidator
     {
-        public static ValidationResult Validate(Report report)
-        {
-            ValidationResult validationResult = BaseValidator.Validate(report);
-            ValidateSpecificFields(report, validationResult);
-            return validationResult;
-        }
-        public static void ValidateSpecificFields(Report report, ValidationResult validationResult)
+
+        public override void ValidateSpecificFields(Report report, ValidationResult validationResult)
         {
             _ValidType(report);
             RadarReport radarReport = (RadarReport)report;
@@ -22,7 +17,7 @@ namespace IntelligencePipeline.Validation
             _ValidateDistance(radarReport, validationResult);
             
         }
-        private static void _ValidType(Report report)
+        private void _ValidType(Report report)
         {
             string validType = "Radar";
             if (validType != report.GetSourceType())
@@ -32,7 +27,7 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidateSpeed(RadarReport report, ValidationResult validationResult)
+        private void _ValidateSpeed(RadarReport report, ValidationResult validationResult)
         {
             double minSpeed = 0;
             double maxSpeed = 2000;
@@ -46,7 +41,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidateDirection(RadarReport report, ValidationResult validationResult)
+        private void _ValidateDirection(RadarReport report, ValidationResult validationResult)
         {
             double minDirection = 0;
             double maxDirection = 360;
@@ -59,7 +54,7 @@ namespace IntelligencePipeline.Validation
             }
         }
 
-        private static void _ValidateDistance(RadarReport report, ValidationResult validationResult)
+        private void _ValidateDistance(RadarReport report, ValidationResult validationResult)
         {
             double minDistance = 100;
             double maxDistance = 100000;

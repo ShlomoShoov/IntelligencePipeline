@@ -28,7 +28,7 @@ namespace IntelligencePipeline.Models.Reports
 
         public int ReliabilityScore { get; set; }
 
-        public ErrorModel RejectionReason { get; set; }
+        public List<ErrorModel> RejectionReason { get; set; }
 
         // constructor 
         protected Report(int reportId, DateTime timestamp, double latitude,
