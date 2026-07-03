@@ -47,7 +47,7 @@ namespace IntelligencePipeline.Models.Reports
             if (SignalStrength >= _bestStrengthThreshold) score += _bestStrengthScore;
             else if (SignalStrength >= _goodStrengthThreshold) score += _goodStrngthScore;
             else if (SignalStrength < _badStrengthThreshold) score += _badStrengthScore;
-            if (StringExtension.InText(text: Content, targetList: KeyWords.signalReliabilityHighScoreKeyWords, ignoreCase: true))
+            if (StringExtension.InText(KeyWords.signalReliabilityHighScoreKeyWords,Content,ignoreCase: true))
                 score += _KeyWordsScore;
             return score;
         }

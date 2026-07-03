@@ -28,7 +28,7 @@ namespace IntelligencePipeline.Models.Reports
 
         public int ReliabilityScore { get; set; }
 
-        public string RejectionReason { get; set; }
+        public ErrorModel RejectionReason { get; set; }
 
         // constructor 
         protected Report(int reportId, DateTime timestamp, double latitude,
@@ -40,6 +40,7 @@ namespace IntelligencePipeline.Models.Reports
             Longitude = longitude;
             Description = description;
             Status = ReportStatus.New;
+            
             
         }
 

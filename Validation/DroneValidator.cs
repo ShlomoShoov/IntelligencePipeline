@@ -1,21 +1,22 @@
 using IntelligencePipeline.Exceptions;
 using IntelligencePipeline.Models.Reports;
-using System.ComponentModel.DataAnnotations;
+
+
 
 namespace IntelligencePipeline.Validation
 {
     /// <summary>
     /// Validates drone-specific report fields.
     /// </summary>
-    public class DroneValidator : BaseValidator, IValidator
+    public class DroneValidator : IValidator
     {
-        public static new ValidationResult Validate(Report report)
+        public static ValidationResult Validate(Report report)
         {
             ValidationResult validationResult = BaseValidator.Validate(report);
             ValidateSpecificFields(report, validationResult);
             return validationResult;
         }
-        public static new void  ValidateSpecificFields(Report report, ValidationResult validationResult)
+        public static void  ValidateSpecificFields(Report report, ValidationResult validationResult)
         {
             
             _ValidType(report);
@@ -26,15 +27,15 @@ namespace IntelligencePipeline.Validation
 
         }
 
-        private static void _ValidType(Report report)
-        {
-            string validType = "Drone";
-            if (validType != report.GetSourceType())
+            private static void _ValidType(Report report)
             {
-                throw new MismatchedObjectException($"excepted processing {validType} but got {report.GetSourceType}");
-            }
+                string validType = "Drone";
+                if (validType != report.GetSourceType())
+                {
+                    throw new MismatchedObjectException($"excepted processing {validType} but got {report.GetSourceType}");
+                }
             
-        }
+            }
 
         private static void _ValidAltitude(DroneReport report, ValidationResult validationResult)
         {

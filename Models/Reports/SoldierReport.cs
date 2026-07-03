@@ -6,7 +6,7 @@ namespace IntelligencePipeline.Models
     /// <summary>
     /// Represents an intelligence report from a soldier in the field.
     /// </summary>
-    class SoldierReport : Report
+    public class SoldierReport : Report
     {
         // const
         private int _baseScore = 4;
@@ -40,7 +40,7 @@ namespace IntelligencePipeline.Models
         {
             int score = _baseScore;
             score += ConfidenceLevel;
-            if (StringExtension.InText(text: Description, targetList: KeyWords.reliabilityCriteriaText, ignoreCase: true))
+            if (StringExtension.InText(wordsList: KeyWords.reliabilityCriteriaText,  targetText: Description,  ignoreCase: true))
                 score += _KeyWorkdsScore;
 
             return score;
