@@ -45,6 +45,11 @@ namespace IntelligencePipeline.Models
 
             return score;
         }
+
+        public override string ToStringSpecificFields()
+        {
+            return $"|ConfidenceLevel: {ConfidenceLevel} | Unit:{Unit} | SoldierID: {SoldierID} | SoldierName : {SoldierName}";
+        }
     }
 
 }

@@ -45,6 +45,11 @@ namespace IntelligencePipeline.Models.Reports
             return score;
         }
 
+        public override string ToStringSpecificFields()
+        {
+            return $"|Distance: {Distance}| Direction:{Direction}| Speed:{Speed}";
+        }
+
 
     }
 }

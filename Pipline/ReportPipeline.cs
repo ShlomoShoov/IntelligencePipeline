@@ -44,7 +44,10 @@ namespace IntelligencePipeline.Pipeline
 
         public int GetNewId()
         {
-            return _nextReportId;
+
+            int newId =  _nextReportId;
+            _nextReportId++;
+            return newId;
         }
 
         //public string GetStatistics()
@@ -70,8 +73,12 @@ namespace IntelligencePipeline.Pipeline
             IValidator validator = _GetValidator(report);
             ValidationResult validationResult = validator.Validate(report);
 
-            if (!validationResult.IsValid) 
+            if (!validationResult.IsValid)
+            {
                 report.Status = ReportStatus.Rejected;
+                report.RejectionReason = validationResult.ErrorMessage;
+            }
+
     
             else
                 report.Status = ReportStatus.Validated;

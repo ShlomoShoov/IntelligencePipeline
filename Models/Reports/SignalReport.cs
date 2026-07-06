@@ -52,6 +52,10 @@ namespace IntelligencePipeline.Models.Reports
             return score;
         }
 
+        public override string ToStringSpecificFields()
+        {
+            return $"|SignalStrength: {SignalStrength} | Language: {Language} | Content: {Content} | Frequency: {Frequency}";
+        }
 
     }
 }

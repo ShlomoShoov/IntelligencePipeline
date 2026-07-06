@@ -3,6 +3,8 @@ using IntelligencePipeline.Validation;
 using IntelligencePipeline.Extensions;
 using IntelligencePipeline.Models.Reports;
 using IntelligencePipeline.Calculators;
+using IntelligencePipeline.Pipeline;
+using IntelligencePipeline.UI;
 
 namespace IntelligencePipeline
 {
@@ -15,6 +17,10 @@ namespace IntelligencePipeline
             Console.WriteLine(r);
             Console.WriteLine(StringExtension.InText("t555", "t555g"));
             Console.WriteLine( PriorityCalculator.Calculate(d));
+
+            ReportPipeline pipe = new ReportPipeline();
+            new ReporterUI(pipe).CreateReport();
+            new AnalyzerUI(pipe).DisplayRejectedReports();
         }
     }
 

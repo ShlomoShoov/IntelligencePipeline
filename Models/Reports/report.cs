@@ -1,5 +1,6 @@
 using IntelligencePipeline.Models.Enums;
 using IntelligencePipeline.Validation;
+using System.Security.Cryptography.X509Certificates;
 
 namespace IntelligencePipeline.Models.Reports
 {
@@ -40,8 +41,10 @@ namespace IntelligencePipeline.Models.Reports
             Longitude = longitude;
             Description = description;
             Status = ReportStatus.New;
-            
-            
+            RejectionReason = [];
+
+
+
         }
 
         // abstract methods 
@@ -51,16 +54,21 @@ namespace IntelligencePipeline.Models.Reports
 
         // Display and Represent the DATA
 
-        public virtual string GetSummary()
-        {
-            return "";
-        }
-
-
-
+        public abstract string ToStringSpecificFields();
         public override string ToString()
         {
-            return "";
+            string result  = $"{GetSourceType()} |ID: {ReportId} |Timestamp: {Timestamp} |Description {Description} |Status {Status}";
+            result += ToStringSpecificFields();
+            if (Status != ReportStatus.Rejected)
+            {
+                result += $"\nPriority: {Priority}| Classification{Classification} | Priority: {Priority}";
+            }
+            else
+            {
+                result += $"\nErrors While Validating:\n{string.Join("\n", RejectionReason)}";
+            }
+
+            return result;
         }
 
 

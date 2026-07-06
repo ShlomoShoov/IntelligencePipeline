@@ -56,6 +56,10 @@ namespace IntelligencePipeline.Models.Reports
             return reliabilityScore;
         }
 
+        public override string ToStringSpecificFields()
+        {
+            return $"|Altitude:{Altitude} | ImageQuality:{ImageQuality}";
+        }
 
 
 
